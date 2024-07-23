@@ -1,0 +1,8 @@
+pandas
+numpy
+tensorflow
+keras
+dlib
+opencv-python
+mtcnn
+deepface
