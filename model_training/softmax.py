@@ -15,7 +15,7 @@ class Softmax():
         model.add(Dense(1024, activation='relu'))
         model.add(Dropout(0.5))
         model.add(Dense(self.num_classes, activation='softmax'))
-        optimizer = Adam(learning_rate=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-7, decay=0.0, amsgrad=False)
+        optimizer = Adam(learning_rate=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-7, amsgrad=False)
         model.compile(loss=keras.losses.categorical_crossentropy, optimizer=optimizer,
         metrics=['accuracy'])
 

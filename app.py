@@ -66,7 +66,7 @@ class RegistrationModule:
 
         ap.add_argument("--faces", default=50,
                         help="Number of faces that camera will get")
-        ap.add_argument("--output", default="../datasets/train/" + name,
+        ap.add_argument("--output", default="./datasets/train/" + name,
                         help="Path to faces output")
 
         args = vars(ap.parse_args())

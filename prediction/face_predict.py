@@ -32,6 +32,7 @@ class FacePredictor:
         frames = 0
         trackers = []
         texts = []
+        print(texts, '1')
 
         cap = cv2.VideoCapture(0)
         while True:
@@ -50,8 +51,9 @@ class FacePredictor:
 
                 trackers = []
                 texts = []
-
+                
                 if len(bboxes) > 0:
+                    print(texts, '2')
                     for bboxe in bboxes:
                         bbox = bboxe['box']
                         bbox = np.array([bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]])
@@ -77,15 +79,15 @@ class FacePredictor:
                         cos_similarity = utils.CosineSimilarity(face_embedding[0]['embedding'], compare_emb[0]['embedding'])
                         if np.any(cos_similarity > cosine_threshold) and proba > proba_threshold:
                             text = name
+                            utils.mark_attendance(name)
                         else:
                             text = "Unknown"
-
+                        print(text)
                         tracker = dlib.correlation_tracker()
                         rect = dlib.rectangle(bbox[0], bbox[1], bbox[2], bbox[3])
                         tracker.start_track(frame, rect)
                         trackers.append(tracker)
                         texts.append(text)
-
                         y = bbox[1] - 10 if bbox[1] - 10 > 10 else bbox[1] + 10
                         cv2.rectangle(frame, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (0, 255, 0), 2)
                         cv2.putText(frame, text, (bbox[0], bbox[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)

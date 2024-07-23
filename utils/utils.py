@@ -1,4 +1,8 @@
 import cv2 as cv
+import os
+import pandas as pd
+from datetime import datetime
+
 
 def create_output_dir():
     # Create a directory with a unique name based on the current timestamp
@@ -53,3 +57,31 @@ def findCosineDistance(test_vec, source_vec):
     cos_distance = 1.0 - cos_similarity
 
     return cos_distance
+
+def create_attendence_df():
+    if os.path.exists('attendance.csv'):
+        try:
+            df = pd.read_csv('attendance.csv')
+            if df.empty or not set(['Name', 'Date', 'Time', 'Date_Time']).issubset(df.columns):
+                raise ValueError("File exists but is empty or has missing columns")
+        except (pd.errors.EmptyDataError, ValueError):
+            df = pd.DataFrame(columns=['Name', 'Date', 'Time', 'Date_Time'])
+    else:
+        df = pd.DataFrame(columns=['Name', 'Date', 'Time', 'Date_Time'])
+    return df
+
+def mark_attendance(name):
+    attended = set()
+    current_time = datetime.now()
+    date = current_time.strftime('%Y-%m-%d')
+    time = current_time.strftime('%H:%M:%S')
+    if name not in attended and name != 'Unknown':
+        attended.add(name)
+        df = create_attendence_df()
+        new_row = ({'Name': name, 'Date': date, 'Time': time, 'Date_Time': current_time})
+        df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
+        df = df.sort_values('Date_Time').groupby('Name').first().reset_index()
+        df = df.drop('Date_Time', axis=1)
+        df.to_csv('attendance.csv', index=False)
+        
+        return True
