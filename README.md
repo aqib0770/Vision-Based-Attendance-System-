@@ -1,6 +1,6 @@
 # Vision-Based Attendance System
 
-This project is a solution designed to automate the process of attendance using facial recognition technology. It is developed to be used in educational instutes, where the attendance of students is taken manually by the teacher. The system will capture the image of the student and compare it with the images stored in the database. If the student is recognized, the attendance will be marked for that student. The system will also generate a report of the attendance of the students.
+This project is a solution designed to automate the process of attendance using facial recognition technology. It is developed to be used in educational instutes, where the attendance of students is taken manually by the teacher. The system will capture the image of the student and compare it with the images stored in the database. If the student is recognized, the attendance will be marked for that student.
 The project utilizes MTCNN for face detection and DeepFace for face recognition and to generate face embeddings. The system is developed using Python and Tkinter.
 
 ## Features
