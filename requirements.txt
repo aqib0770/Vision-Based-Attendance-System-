@@ -7,3 +7,4 @@ opencv-python
 mtcnn
 deepface
 scikit-learn
+scikit-image
