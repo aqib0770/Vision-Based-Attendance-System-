@@ -6,3 +6,4 @@ dlib
 opencv-python
 mtcnn
 deepface
+scikit-learn
