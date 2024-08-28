@@ -79,7 +79,7 @@ class RegistrationModule:
     def getFaceEmbedding(self):
         ap = argparse.ArgumentParser()
 
-        ap.add_argument("--dataset", default="../datasets/train", help="Path to training dataset")
+        ap.add_argument("--dataset", default="datasets/train", help="Path to training dataset")
         ap.add_argument("--embeddings", default="faceEmbeddingModels/embeddings.pickle")
         ap.add_argument('--image-size', default='112,112', help='')
         ap.add_argument('--ga-model', default='', help='path to load model.')
