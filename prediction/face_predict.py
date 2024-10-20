@@ -23,6 +23,8 @@ class FacePredictor:
         self.threshold = 0.5
         self.embeddings = self.data['embeddings']
         self.labels = self.le.fit_transform(self.data['names'])
+    
+    
 
     def predict(self):
 
